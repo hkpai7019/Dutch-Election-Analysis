@@ -5,7 +5,7 @@ import numpy as np
 import math
 
 
-def test_for_regios(identifier, output_df=gemeente_tables_info):
+def test_for_regios(identifier, output_df):
     ''' Function to check whether the table has a regios/regions column
 
     Args:
@@ -46,7 +46,7 @@ def test_for_regios(identifier, output_df=gemeente_tables_info):
         return output_df
 
 
-def test_for_perioden(identifier, output_df=gemeente_tables_info):
+def test_for_perioden(identifier, output_df):
     ''' Function to check whether the table has a perioden/period column
 
     Args:
@@ -86,7 +86,7 @@ def test_for_perioden(identifier, output_df=gemeente_tables_info):
         return output_df
 
 
-def test_for_gemeente_desc(identifier, output_df=gemeente_tables_info):
+def test_for_gemeente_desc(identifier, output_df):
     ''' Function to check whether the table mentioned "gemeente" in its ShortDescription column
 
     Args:
@@ -97,7 +97,8 @@ def test_for_gemeente_desc(identifier, output_df=gemeente_tables_info):
         updated dataframe gemeente_tables_info with the information of whether the table in that
         row actually mentioned "gemeente" in its ShortDescription column.
     '''
-
+    tables = pd.DataFrame(cbsodata.get_table_list())
+    
     tables_gemeente = tables[tables['ShortDescription'].str.contains('gemeente')]
     tables_gemeente.columns = [x.lower() for x in tables_gemeente.columns]
 
